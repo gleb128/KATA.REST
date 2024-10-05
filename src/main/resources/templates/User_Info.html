@@ -1,19 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>User</title>
-    <h2>User info:</h2>
 </head>
 <body>
 
-<table border="1">
+<div class="navbar navbar-dark bg-dark">
+    <span class="navbar-text text-white">
+        <span class="font-weight-bold" th:text="${username}"></span>
+      <span th:text="'with roles: '"></span>
+        <span th:each="role : ${roles}" th:text="${#strings.replace(role.getName(), 'ROLE_', '') + ' '}" ></span>
+    </span>
+    <form th:action="@{/logout}" method="post" class="form-inline">
+        <button type="submit" class="btn btn-outline-light">Logout</button>
+    </form>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-md-block bg-light sidebar">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="/admin/all-users" class="nav-link"> Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user" class="nav-link active"> User</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<style>
+    .nav-link.active {
+        background-color: cornflowerblue;
+        color: white;
+        padding-left: 0;
+        text-indent: 10px;
+    }
+    .sidebar {
+        padding-left: 0;
+    }
+    .nav-link {
+        padding-left: 0;
+        text-indent: 10px;
+    }
+</style>
+<div class="container mt-5">
+    <h1>User-information page</h1>
+    <br>
+    <br>
+    <h5>About user</h5>
+    <br>
+    <br>
+
+<div class="table-responsive">
+<table class="table striped">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>LastName</th>
         <th>age</th>
+        <th>Username</th>
+        <th>Role</th>
     </tr>
 
     </thead>
@@ -23,12 +77,17 @@
         <td th:text="${user.getName()}">Name</td>
         <td th:text="${user.getLastName()}">LastName</td>
         <td th:text="${user.getAge()}">Age</td>
+        <td th:text="${user.username}">Username</td>
+        <td>
+  <span th:each="role : ${user.roles}">
+    <span th:text="${#strings.replace(role.toString(), 'ROLE_', '')}"></span>
+  </span>
+        </td>
     </tr>
     </tbody>
 </table>
 <br>
-<form th:action="@{'/logout'}">
-    <input type="submit" value="Logout"/>
-</form>
+</div>
+</div>
 </body>
 </html>
