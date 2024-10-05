@@ -19,6 +19,16 @@
     <input type="password" th:field="*{password}" />
   </p>
   <p>
+    <label>Roles:</label>
+    <label>
+      <input type="checkbox" name="roleIds"
+             th:each="role : ${roles}"
+             th:text="${role.name}"
+             th:value="${role.id}"
+             th:checked="${user.roles.contains(role)}" />
+    </label>
+  </p>
+  <p>
     <button type="submit">Save</button>
   </p>
 </form>

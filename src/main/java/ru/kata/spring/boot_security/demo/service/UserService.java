@@ -17,10 +17,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService, UserServiceInterface {
@@ -74,14 +71,14 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     }
 
     @Transactional
-    public boolean saveUser(User user) {
+    public boolean saveUser(User user, List<Long> roleIds) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;
         }
-
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
+        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

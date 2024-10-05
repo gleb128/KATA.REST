@@ -14,7 +14,7 @@ public interface UserServiceInterface {
 
     List<User> allUsers();
 
-    boolean saveUser(User user);
+    boolean saveUser(User user, List<Long> roleIds);
 
     boolean deleteUser(Long userId);
 }

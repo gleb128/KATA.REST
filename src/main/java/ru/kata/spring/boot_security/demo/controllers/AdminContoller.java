@@ -15,6 +15,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -26,9 +27,11 @@ public class AdminContoller {
 
     @GetMapping("/admin/new-user")
     public String newUser(Model model) {
-        model.addAttribute("user", new User());
+        User user = new User();
+        user.setRoles(new HashSet<>());
+        model.addAttribute("user", user);
         List<Role> roles = roleRepository.findAll();
-        model.addAttribute("roles", roles);
+        model.addAttribute("roles", roleRepository.findAll());
         return "user_form";
     }
 
@@ -42,9 +45,9 @@ public class AdminContoller {
     }
 
     @PostMapping("/admin/save-new-user")
-    public String saveUser(@ModelAttribute("user") User user) {
-
-        userServiceInterface.saveUser(user);
+    public String saveUser(@ModelAttribute("user") User user,
+                           @RequestParam("roleIds") List<Long> roleIds) {
+        userServiceInterface.saveUser(user, roleIds);
         return "redirect:/admin/all-users";
     }
 
