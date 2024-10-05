@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserServiceInterface;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,8 @@ public class AdminContoller {
     }
 
     @GetMapping("/admin/all-users")
-    public String ShowUsers(Model model) {
+    public String ShowUsers(Model model, Principal principal) {
+        model.addAttribute("username", principal.getName());
         List<User> users = userServiceInterface.allUsers();
         List<Role> roles = (List<Role>) roleRepository.findAll();
         model.addAttribute("users", users);
