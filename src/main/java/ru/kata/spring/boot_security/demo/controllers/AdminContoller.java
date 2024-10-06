@@ -26,7 +26,8 @@ public class AdminContoller {
     private UserServiceInterface userServiceInterface;
 
     @GetMapping("/admin/new-user")
-    public String newUser(Model model) {
+    public String newUser(Model model, Principal principal) {
+        model.addAttribute("username", principal.getName());
         User user = new User();
         user.setRoles(new HashSet<>());
         model.addAttribute("user", user);
