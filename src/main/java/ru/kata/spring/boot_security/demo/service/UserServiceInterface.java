@@ -1,6 +1,7 @@
-package ru.kata.spring.boot_security.demo.repository;
+package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserServiceInterface {
     boolean saveUser(User user, List<Long> roleIds);
 
     boolean deleteUser(Long userId);
+
+    List<Role> findAll();
 }
