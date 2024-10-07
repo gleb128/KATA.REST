@@ -47,72 +47,74 @@
                 <h5>All users</h5>
             </div>
 
-<style>
-    .nav-link.active {
-        background-color: cornflowerblue;
-        color: white;
-        padding-left: 0;
-        text-indent: 10px;
-    }
+            <style>
+                .nav-link.active {
+                    background-color: cornflowerblue;
+                    color: white;
+                    padding-left: 0;
+                    text-indent: 10px;
+                }
 
-    .sidebar {
-        padding-left: 0;
-    }
+                .sidebar {
+                    padding-left: 0;
+                }
 
-    .nav-link {
-        padding-left: 0;
-        text-indent: 10px;
-    }
+                .nav-link {
+                    padding-left: 0;
+                    text-indent: 10px;
+                }
 
-</style>
+            </style>
 
 
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>LastName</th>
-                <th>Age</th>
-                <th>Username</th>
-                <th>Roles</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}">id</td>
-                <td th:text="${user.name}">name</td>
-                <td th:text="${user.lastName}">LastName</td>
-                <td th:text="${user.age}">age</td>
-                <td th:text="${user.username}">username</td>
-                <td>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>LastName</th>
+                        <th>Age</th>
+                        <th>Username</th>
+                        <th>Roles</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}">id</td>
+                        <td th:text="${user.name}">name</td>
+                        <td th:text="${user.lastName}">LastName</td>
+                        <td th:text="${user.age}">age</td>
+                        <td th:text="${user.username}">username</td>
+                        <td>
   <span th:each="role : ${user.roles}">
     <span th:text="${#strings.replace(role.toString(), 'ROLE_', '')}"></span>
   </span>
-                </td>
-                <td>
-                    <form th:action="@{/admin/edit}" method="get">
-                        <input type="hidden" name="id" th:value="${user.id}"/>
-                        <input type="submit" value="Edit" class="btn btn-primary"/>
+                        </td>
+                        <td>
+                            <form th:action="@{/admin/edit}" method="get">
+                                <input type="hidden" name="id" th:value="${user.id}"/>
+                                <input type="submit" value="Edit" class="btn btn-primary"/>
 
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/admin/delete(id=${user.id})}" method="post">
-                        <input type="submit" value="Delete" class="btn btn-danger"/>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/admin/delete(id=${user.id})}" method="post">
+                                <input type="submit" value="Delete" class="btn btn-danger"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 
 
-</body>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        $1
 </html>
