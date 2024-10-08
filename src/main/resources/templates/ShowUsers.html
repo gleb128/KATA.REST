@@ -210,7 +210,7 @@
                                                     <option th:each="role : ${roles}" th:value="${role.id}"
                                                             th:text="${#strings.replace(role, 'ROLE_', '')}"
                                                             th:selected="${user.roles.contains(role)}"></option>
-                                                </select> readonly
+                                                </select>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">

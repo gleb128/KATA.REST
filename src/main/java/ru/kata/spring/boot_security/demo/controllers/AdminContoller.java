@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserServiceInterface;
 
 import java.security.Principal;
@@ -43,21 +42,11 @@ public class AdminContoller {
     }
 
     @PostMapping("/admin/save-new-user")
-    public String saveUser(@ModelAttribute("user") User user,
-                           @RequestParam("roleIds") List<Long> roleIds) {
+    public String saveUser(@ModelAttribute("user") User user, @RequestParam("roleIds") List<Long> roleIds) {
         userServiceInterface.saveUser(user, roleIds);
         return "redirect:/admin/all-users";
     }
 
-
-    @GetMapping("/admin/edit")
-    public String editUser(@RequestParam(name = "id") Long id, Model model) {
-        User user = userServiceInterface.findUserById(id);
-        model.addAttribute("user", user);
-        List<Role> roles = userServiceInterface.findAll();
-        model.addAttribute("roles", roles);
-        return "user_form_edit";
-    }
 
     @GetMapping("/admin/all-users")
     public String ShowUsers(Model model, Principal principal) {

@@ -19,7 +19,6 @@ import java.util.*;
 public class UserService implements UserDetailsService, UserServiceInterface {
 
 
-
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
@@ -88,6 +87,7 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         }
         return false;
     }
+
     @Transactional(readOnly = true)
     @Override
     public List<Role> findAll() {
