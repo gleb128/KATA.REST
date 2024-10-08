@@ -96,11 +96,8 @@
   </span>
                         </td>
                         <td>
-                            <form th:action="@{/admin/edit}" method="get">
-                                <input type="hidden" name="id" th:value="${user.id}"/>
-                                <input type="submit" value="Edit" class="btn btn-primary"/>
-
-                            </form>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal">Edit</button>
                         </td>
                         <td>
                             <form th:action="@{/admin/delete(id=${user.id})}" method="post">
@@ -114,5 +111,65 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="userId" class="font-weight-bold text-center w-100">ID</label>
+                        <input type="text" class="form-control" id="userId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName" class="font-weight-bold text-center w-100">Name</label>
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="font-weight-bold text-center w-100">Last Name</label>
+                        <input type="text" class="form-control" id="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="age" class="font-weight-bold text-center w-100">Age</label>
+                        <input type="number" class="form-control" id="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="font-weight-bold text-center w-100">Username</label>
+                        <input type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="font-weight-bold text-center w-100">Password</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="roles" class="font-weight-bold text-center w-100">Role</label>
+                        <select class="form-control" id="roles" multiple>
+                            <option>ADMIN</option>
+                            <option>USER</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 </body>
 </html>
