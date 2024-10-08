@@ -89,11 +89,13 @@
                     <td th:text="${user.age}">30</td>
                     <td th:text="${user.username}">johndoe</td>
                     <td>
-                    <span th:each="role : ${user.roles}" th:text="${#strings.replace(role.name, 'ROLE_', '') + ' '}"></span>
+                        <span th:each="role : ${user.roles}"
+                              th:text="${#strings.replace(role.name, 'ROLE_', '') + ' '}"></span>
                     </td>
                     <td>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#modal' + ${user.id}">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                th:data-target="'#modal' + ${user.id}">
                             Edit
                         </button>
 
@@ -111,23 +113,28 @@
                                         <form th:action="@{/admin/update-user}" method="post">
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">ID</label>
-                                                <input type="text" class="form-control" name="id" th:value="${user.id}" readonly>
+                                                <input type="text" class="form-control" name="id" th:value="${user.id}"
+                                                       readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">name</label>
-                                                <input type="text" class="form-control" name="name" th:value="${user.name}">
+                                                <input type="text" class="form-control" name="name"
+                                                       th:value="${user.name}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">Last Name</label>
-                                                <input type="text" class="form-control" name="lastName" th:value="${user.lastName}">
+                                                <input type="text" class="form-control" name="lastName"
+                                                       th:value="${user.lastName}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">Age</label>
-                                                <input type="number" class="form-control" name="age" th:value="${user.age}">
+                                                <input type="number" class="form-control" name="age"
+                                                       th:value="${user.age}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">Username</label>
-                                                <input type="text" class="form-control" name="username" th:value="${user.username}">
+                                                <input type="text" class="form-control" name="username"
+                                                       th:value="${user.username}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="font-weight-bold text-center w-100">Password</label>
@@ -142,7 +149,9 @@
                                                 </select>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
                                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </form>
@@ -153,17 +162,73 @@
                     </td>
                     <td>
 
-                        <form th:action="@{/admin/delete}" method="post">
-                            <input type="hidden" name="id" th:value="${user.id}">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                th:data-target="'#modald' + ${user.id}">
+                            Delete
+                        </button>
+
+                        <div class="modal fade" th:id="'modald' + ${user.id}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete user</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/delete}" method="post">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">ID</label>
+                                                <input type="text" class="form-control" name="id" th:value="${user.id}"
+                                                       readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">name</label>
+                                                <input type="text" class="form-control" name="name"
+                                                       th:value="${user.name}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">Last Name</label>
+                                                <input type="text" class="form-control" name="lastName"
+                                                       th:value="${user.lastName}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">Age</label>
+                                                <input type="number" class="form-control" name="age"
+                                                       th:value="${user.age}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">Username</label>
+                                                <input type="text" class="form-control" name="username"
+                                                       th:value="${user.username}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold text-center w-100">Roles</label>
+                                                <select class="form-control" name="roleIds" multiple>
+                                                    <option th:each="role : ${roles}" th:value="${role.id}"
+                                                            th:text="${#strings.replace(role, 'ROLE_', '')}"
+                                                            th:selected="${user.roles.contains(role)}"></option>
+                                                </select> readonly
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </td>
                 </tr>
                 </tbody>
             </table>
-
-
-
 
 
 </body>
