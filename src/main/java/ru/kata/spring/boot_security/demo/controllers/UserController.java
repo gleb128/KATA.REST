@@ -18,7 +18,6 @@ public class UserController {
     @Autowired
     private UserServiceInterface userService;
 
-
     @GetMapping("/user")
     public String userInfo(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
