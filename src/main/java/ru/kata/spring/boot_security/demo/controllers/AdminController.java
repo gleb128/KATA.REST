@@ -25,9 +25,7 @@ public class AdminController {
     public String newUser(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
         User user = new User();
-        user.setRoles(new HashSet<>());
         model.addAttribute("user", user);
-        List<Role> roles = userServiceInterface.findAll();
         model.addAttribute("roles", userServiceInterface.findAll());
         return "user_form";
     }
