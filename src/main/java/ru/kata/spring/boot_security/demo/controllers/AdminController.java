@@ -27,7 +27,7 @@ public class AdminController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("roles", userServiceInterface.findAll());
-        return "user_form";
+        return "redirect:/admin/all-users";
     }
     @PostMapping("/admin/update-user")
     public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
@@ -49,6 +49,7 @@ public class AdminController {
         List<Role> roles = (List<Role>) userServiceInterface.findAll();
         model.addAttribute("users", users);
         model.addAttribute("roles", roles);
+        model.addAttribute("user", new User());
         return "ShowUsers";
     }
     @PostMapping("/admin/delete")
