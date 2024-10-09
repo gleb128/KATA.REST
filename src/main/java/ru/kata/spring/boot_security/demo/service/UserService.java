@@ -17,8 +17,6 @@ import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService, UserServiceInterface {
-
-
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
@@ -30,8 +28,6 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-
     @Transactional
     public void updateUser(User user, List<Long> roleIds) {
         List<Role> roles = roleRepository.findAllById(roleIds);
@@ -41,34 +37,27 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         }
         userRepository.save(user);
     }
-
-
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         return user;
     }
-
     @Transactional(readOnly = true)
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
     }
-
     @Transactional(readOnly = true)
     public List<User> allUsers() {
         return userRepository.findAll();
     }
-
     @Transactional
     public boolean saveUser(User user, List<Long> roleIds) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-
         if (userFromDB != null) {
             return false;
         }
@@ -78,7 +67,6 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         userRepository.save(user);
         return true;
     }
-
     @Transactional
     public boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
@@ -87,7 +75,6 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         }
         return false;
     }
-
     @Transactional(readOnly = true)
     @Override
     public List<Role> findAll() {

@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @Controller
-public class AdminContoller {
+public class AdminController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
@@ -31,7 +31,6 @@ public class AdminContoller {
         model.addAttribute("roles", userServiceInterface.findAll());
         return "user_form";
     }
-
     @PostMapping("/admin/update-user")
     public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
         if (roleIds == null) {
@@ -40,14 +39,11 @@ public class AdminContoller {
         userServiceInterface.updateUser(user, roleIds);
         return "redirect:/admin/all-users";
     }
-
     @PostMapping("/admin/save-new-user")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam("roleIds") List<Long> roleIds) {
         userServiceInterface.saveUser(user, roleIds);
         return "redirect:/admin/all-users";
     }
-
-
     @GetMapping("/admin/all-users")
     public String ShowUsers(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
@@ -57,12 +53,9 @@ public class AdminContoller {
         model.addAttribute("roles", roles);
         return "ShowUsers";
     }
-
     @PostMapping("/admin/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userServiceInterface.deleteUser(id);
         return "redirect:/admin/all-users";
     }
-
-
 }
