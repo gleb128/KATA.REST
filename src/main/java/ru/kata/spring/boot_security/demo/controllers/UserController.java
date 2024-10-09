@@ -22,8 +22,7 @@ public class UserController {
     public String userInfo(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
         User user = (User) userService.loadUserByUsername(principal.getName());
-        List<Role> roles = (List<Role>) userService.findAll();
-        model.addAttribute("roles", roles);
+        model.addAttribute("roles", user.getRoles());
         model.addAttribute("user", user);
         return "User_Info";
     }
