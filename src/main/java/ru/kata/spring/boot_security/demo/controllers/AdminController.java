@@ -21,14 +21,6 @@ public class AdminController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
-    @GetMapping("/admin/new-user")
-    public String newUser(Model model, Principal principal) {
-        model.addAttribute("username", principal.getName());
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", userServiceInterface.findAll());
-        return "redirect:/admin/all-users";
-    }
     @PostMapping("/admin/update-user")
     public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
         if (roleIds == null) {
@@ -42,6 +34,7 @@ public class AdminController {
         userServiceInterface.saveUser(user, roleIds);
         return "redirect:/admin/all-users";
     }
+
     @GetMapping("/admin/all-users")
     public String ShowUsers(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
@@ -52,6 +45,7 @@ public class AdminController {
         model.addAttribute("user", new User());
         return "ShowUsers";
     }
+
     @PostMapping("/admin/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userServiceInterface.deleteUser(id);

@@ -42,8 +42,7 @@ public class User implements UserDetails {
     public Set<Role> getRoles() {
         return roles;
     }
-    public User() {
-    }
+    public User() {}
     public Long getId() {
         return id;
     }

@@ -21,13 +21,13 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
-
     @Autowired
     public UserService(UserRepository userRepository, RoleRepository roleRepository, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Transactional
     public void updateUser(User user, List<Long> roleIds) {
         List<Role> roles = roleRepository.findAllById(roleIds);
@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         }
         userRepository.save(user);
     }
+
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,15 +47,18 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         }
         return user;
     }
+
     @Transactional(readOnly = true)
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
     }
+
     @Transactional(readOnly = true)
     public List<User> allUsers() {
         return userRepository.findAll();
     }
+
     @Transactional
     public boolean saveUser(User user, List<Long> roleIds) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
