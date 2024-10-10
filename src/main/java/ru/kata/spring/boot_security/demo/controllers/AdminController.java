@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,27 +21,34 @@ public class AdminController {
     private UserServiceInterface userServiceInterface;
 
     @PutMapping("/admin/update-user")
-    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
+    public ResponseEntity<User> updateUser(@RequestParam(value = "roleIds", required = false) List<Long> roleIds, @RequestBody User user) {
         if (roleIds == null) {
             roleIds = new ArrayList<>();
         }
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
         userServiceInterface.updateUser(user, roleIds);
-        return "redirect:/admin/all-users";
+        return ResponseEntity.ok(user);
     }
     @PostMapping("/admin/save-new-user")
-    public String saveUser(@ModelAttribute("user") User user, @RequestParam("roleIds") List<Long> roleIds) {
-        userServiceInterface.saveUser(user, roleIds);
-        return "redirect:/admin/all-users";
+    public ResponseEntity<String> saveUser(@RequestBody User user, @RequestParam("roleIds") List<Long> roleIds) {
+        boolean isSaved = userServiceInterface.saveUser(user, roleIds);
+        if (!isSaved) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("null");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
     @GetMapping("/admin/all-users")
-    public List<User> ShowUsers() {
-        return userServiceInterface.allUsers();
+    public ResponseEntity<List<User>> ShowUsers() {
+        List<User> users = userServiceInterface.allUsers();
+        return ResponseEntity.ok(users);
     }
 
-    @PostMapping("/admin/delete")
-    public String deleteUser(@RequestParam("id") Long id) {
+    @DeleteMapping("/admin/delete")
+    public ResponseEntity<String> deleteUser(@RequestParam("id") Long id) {
         userServiceInterface.deleteUser(id);
-        return "redirect:/admin/all-users";
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }
 }
