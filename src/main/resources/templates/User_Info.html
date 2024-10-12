@@ -37,18 +37,21 @@
 
         <script>
           function loadUserInfo(){
-              fetch('/user')
+              fetch('/userAPI/user')
                   .then(response => response.json())
                   .then(user => {
                       let tableBody = document.querySelector("#UserTable tbody")
                       tableBody.innerHTML = '';
+
+                      let roles = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
+
                       let row = `<tr>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
                         <td>${user.lastName}</td>
                         <td>${user.age}</td>
                         <td>${user.username}</td>
-                        <td>${user.roleIds.map(role => role.name).join(', ')}</td>
+                        <td>${roles}</td>
                         </tr>`;
                       tableBody.innerHTML += row;
                   })

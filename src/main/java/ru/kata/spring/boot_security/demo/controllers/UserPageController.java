@@ -1,24 +1,25 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceInterface;
 
 import java.security.Principal;
 
-@RestController
-@RequestMapping("/userAPI")
-public class UserController {
+@Controller
+public class UserPageController {
     @Autowired
     private UserServiceInterface userService;
 
     @GetMapping("/user")
-    public ResponseEntity<User> userInfo(Principal principal) {
+    public String userInfo(Model model, Principal principal) {
+        model.addAttribute("username", principal.getName());
         User user = (User) userService.loadUserByUsername(principal.getName());
-        return ResponseEntity.ok(user);
+        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("user", user);
+        return "User_Info";
     }
 }
