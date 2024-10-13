@@ -41,7 +41,7 @@
                   .then(response => response.json())
                   .then(user => {
                       let tableBody = document.querySelector("#UserTable tbody")
-                      tableBody.innerHTML = '';
+
 
                       let roles = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
 
