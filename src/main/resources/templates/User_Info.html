@@ -36,16 +36,15 @@
         </nav>
 
         <script>
-          function loadUserInfo(){
-              fetch('/userAPI/user')
-                  .then(response => response.json())
-                  .then(user => {
-                      let tableBody = document.querySelector("#UserTable tbody")
+            async function loadUserInfo() {
+               try {
+                   const response = await fetch('/userAPI/user')
+                   const user = await response.json();
 
+                   let tableBody = document.querySelector("#UserTable tbody")
+                   let roles = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
 
-                      let roles = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
-
-                      let row = `<tr>
+                   let row = `<tr>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
                         <td>${user.lastName}</td>
@@ -53,11 +52,12 @@
                         <td>${user.username}</td>
                         <td>${roles}</td>
                         </tr>`;
-                      tableBody.innerHTML += row;
-                  })
-                  .catch(error => console.error('Couldn\'t load user: ', error));
-          }
-          window.onload = loadUserInfo;
+                   tableBody.innerHTML = tableBody.innerHTML + row;
+               } catch (error) {
+                   console.error('Couldn\'t load user: ', error);
+               }
+            }
+            window.onload = loadUserInfo;
         </script>
 
         <div class="col-md-9 min-vh-100">
