@@ -20,7 +20,7 @@ public class AdminController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
-    @PutMapping("/admin/update-user")
+    @PutMapping("/admin/users/{id}")
     public ResponseEntity<User> updateUser(@RequestParam(value = "roleIds", required = false) List<Long> roleIds, @RequestBody User user) {
         if (roleIds == null) {
             roleIds = new ArrayList<>();
@@ -31,7 +31,7 @@ public class AdminController {
         userServiceInterface.updateUser(user, roleIds);
         return ResponseEntity.ok(user);
     }
-    @PostMapping("/admin/save-new-user")
+    @PostMapping("/admin/users")
     public ResponseEntity<String> saveUser(@RequestBody User user, @RequestParam("roleIds") List<Long> roleIds) {
         boolean isSaved = userServiceInterface.saveUser(user, roleIds);
         if (!isSaved) {
@@ -40,13 +40,13 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
-    @GetMapping("/admin/all-users")
+    @GetMapping("/admin/users")
     public ResponseEntity<List<User>> ShowUsers() {
         List<User> users = userServiceInterface.allUsers();
         return ResponseEntity.ok(users);
     }
 
-    @DeleteMapping("/admin/delete")
+    @DeleteMapping("/admin/users/{id}")
     public ResponseEntity<String> deleteUser(@RequestParam("id") Long id) {
         userServiceInterface.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");

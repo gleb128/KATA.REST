@@ -33,7 +33,7 @@ public class AdminPageController {
         return "redirect:/admin/all-users11";
     }
 
-    @GetMapping("/admin/all-users1")
+    @GetMapping("/admin/all-users")
     public String ShowUsers(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
         List<User> users = userServiceInterface.allUsers();
