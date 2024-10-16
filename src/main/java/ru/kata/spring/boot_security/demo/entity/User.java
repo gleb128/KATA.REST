@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +29,9 @@ public class User implements UserDetails {
     )
 
     private Set<Role> roles;
+
+    @Transient
+    private List<Long> roleIds;
 
     public User(String password, String name, String lastName, Byte age, String username, Set<Role> roles) {
         this.password = password;
@@ -75,6 +79,10 @@ public class User implements UserDetails {
     public void setAge(Byte age) {
         this.age = age;
     }
+    public List<Long> getRoleIds() {
+        return roleIds;}
+    public void setRoleIds(List<Long> roleIds) {
+        this.roleIds = roleIds;}
 
 
     @Override

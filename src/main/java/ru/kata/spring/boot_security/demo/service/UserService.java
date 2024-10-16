@@ -60,13 +60,11 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     }
 
     @Transactional
-    public boolean saveUser(User user, List<Long> roleIds) {
+    public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null) {
             return false;
         }
-        Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
-        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

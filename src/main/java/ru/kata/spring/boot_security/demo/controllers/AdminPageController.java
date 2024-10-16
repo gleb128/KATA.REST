@@ -29,7 +29,7 @@ public class AdminPageController {
     }
     @PostMapping("/admin/save-new-user1")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam("roleIds") List<Long> roleIds) {
-        userServiceInterface.saveUser(user, roleIds);
+        userServiceInterface.saveUser(user);
         return "redirect:/admin/all-users11";
     }
 

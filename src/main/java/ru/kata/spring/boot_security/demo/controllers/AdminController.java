@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @RestController
 public class AdminController {
     @Autowired
@@ -32,8 +34,8 @@ public class AdminController {
         return ResponseEntity.ok(user);
     }
     @PostMapping("/admin/users")
-    public ResponseEntity<String> saveUser(@RequestBody User user, @RequestParam("roleIds") List<Long> roleIds) {
-        boolean isSaved = userServiceInterface.saveUser(user, roleIds);
+    public ResponseEntity<String> saveUser(@RequestBody User user) {
+        boolean isSaved = userServiceInterface.saveUser(user);
         if (!isSaved) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("null");
         }
@@ -47,7 +49,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/admin/users/{id}")
-    public ResponseEntity<String> deleteUser(@RequestParam("id") Long id) {
+    public ResponseEntity<String> deleteUser( @PathVariable Long id) {
         userServiceInterface.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }
