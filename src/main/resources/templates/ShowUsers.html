@@ -159,30 +159,30 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form th:action="@{/admin/delete}" method="post">
-                                <div class="form-group" id="idDel">
+                            <form>
+                                <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">ID</label>
-                                    <input type="text" class="form-control" name="id"
+                                    <input type="text" class="form-control" id="idDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" id="nameDel">
+                                <div class="form-group" >
                                     <label class="font-weight-bold text-center w-100">name</label>
-                                    <input type="text" class="form-control" name="name"
+                                    <input type="text" class="form-control" id="nameDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" id="lastNameDel">
+                                <div class="form-group" >
                                     <label class="font-weight-bold text-center w-100">Last Name</label>
-                                    <input type="text" class="form-control" name="lastName"
+                                    <input type="text" class="form-control" id="lastNameDel"
                                             readonly>
                                 </div>
-                                <div class="form-group" id="ageDel">
+                                <div class="form-group" >
                                     <label class="font-weight-bold text-center w-100">Age</label>
-                                    <input type="number" class="form-control" name="age"
+                                    <input type="number" class="form-control" id="ageDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" id="usernameDel">
+                                <div class="form-group" >
                                     <label class="font-weight-bold text-center w-100">Username</label>
-                                    <input type="text" class="form-control" name="username"
+                                    <input type="text" class="form-control" name="username" id="usernameDel"
                                           readonly>
                                 </div>
                                 <div class="form-group">
@@ -196,7 +196,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-danger" id="userDeleteButtonModal">Delete</button>
                                 </div>
                             </form>
                         </div>

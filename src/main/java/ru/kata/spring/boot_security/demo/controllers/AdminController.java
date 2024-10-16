@@ -48,6 +48,12 @@ public class AdminController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/admin/user-info/{id}")
+    public ResponseEntity<User> getUserInfo(@PathVariable Long id)  {
+        User user = userServiceInterface.findUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
     @DeleteMapping("/admin/users/{id}")
     public ResponseEntity<String> deleteUser( @PathVariable Long id) {
         userServiceInterface.deleteUser(id);

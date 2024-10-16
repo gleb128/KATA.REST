@@ -42,7 +42,7 @@ async function loadAllUsers() {
             const deleteButton = document.createElement('button')
             deleteButton.textContent = 'Delete';
             deleteButton.classList.add('btn', 'btn-danger')
-            deleteButton.addEventListener('click', () => openDeleteModal());
+            deleteButton.addEventListener('click', () => openDeleteModal(user.id));
             deleteCell.appendChild(deleteButton)
 
 
@@ -102,16 +102,29 @@ async function addNewUser() {
 }
 
 /////////////////////////Удаление юзера
-function openDeleteModal () {
-    $('#deleteModal').modal('show');
-    console.log('Open button clicked');
+ async function openDeleteModal (id) {
+    try { const response = await fetch(`/admin/user-info/${id}`)
+          const userToDelete = await response.json();
+        console.log(userToDelete);
+        document.getElementById('idDel').value=userToDelete.id
+        document.getElementById('nameDel').value = userToDelete.name
+        document.getElementById('lastNameDel').value = userToDelete.lastName
+        document.getElementById('ageDel').value = userToDelete.age
+        document.getElementById('usernameDel').value = userToDelete.username
+        $('#deleteModal').modal('show');
+        document.getElementById('userDeleteButtonModal').addEventListener('click',() => deleteUser(userToDelete.id))
+    } catch(error) {
+        console.error("Error finding user: ", error);
+    }
 }
+
+
 function closeModal() {
     $('#deleteModal').modal('hide');
 }
 
-document.getElementById('openModalBtn').addEventListener('click', openModal);
-document.getElementById('closeModal').addEventListener('click', closeModal);
+//document.getElementById('openModalBtn').addEventListener('click', openModal);
+//document.getElementById('closeModal').addEventListener('click', closeModal);
 
 
 async function deleteUser(id) {
