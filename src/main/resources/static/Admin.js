@@ -42,7 +42,7 @@ async function loadAllUsers() {
             const deleteButton = document.createElement('button')
             deleteButton.textContent = 'Delete';
             deleteButton.classList.add('btn', 'btn-danger')
-            deleteButton.addEventListener('click', () => deleteUser(user.id));
+            deleteButton.addEventListener('click', () => openDeleteModal());
             deleteCell.appendChild(deleteButton)
 
 
@@ -64,9 +64,12 @@ async function loadAllUsers() {
 
 loadAllUsers()
 
+/////////////////////////// Добавление юзера !
 const newUserForm = document.getElementById('addUserForm');
 newUserForm.addEventListener('submit', (event) => {
     addNewUser();
+    event.preventDefault()
+
 })
 
 function createUserFromForm() {
@@ -87,7 +90,7 @@ async function addNewUser() {
             "content-type": 'application/json'
         }
     })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log("User added", data);
             document.querySelector('#users-tab').click();
@@ -97,6 +100,19 @@ async function addNewUser() {
             console.error("Error adding user:", error);
         });
 }
+
+/////////////////////////Удаление юзера
+function openDeleteModal () {
+    $('#deleteModal').modal('show');
+    console.log('Open button clicked');
+}
+function closeModal() {
+    $('#deleteModal').modal('hide');
+}
+
+document.getElementById('openModalBtn').addEventListener('click', openModal);
+document.getElementById('closeModal').addEventListener('click', closeModal);
+
 
 async function deleteUser(id) {
     try {
