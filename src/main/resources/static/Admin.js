@@ -138,3 +138,15 @@ async function deleteUser(id) {
     }
 }
 
+async function loadAdminNavbar () {
+    try {
+        const response = await fetch('/userAPI/user');
+        const user = await response.json();
+        document.getElementById('adminUsernameNavbar').textContent = user.username;
+        document.getElementById('rolesAdminNavbar').textContent = "with roles: "
+        document.getElementById('adminRolesSpan8').textContent = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
+    } catch (error) {
+        console.error('Error loading navbar', error);
+    }
+}
+loadAdminNavbar()

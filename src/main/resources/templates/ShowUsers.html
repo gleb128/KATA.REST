@@ -12,9 +12,9 @@
 
 <div class="navbar navbar-dark bg-dark">
     <span class="navbar-text text-white">
-        <span class="font-weight-bold" th:text="${username}"></span>
-      <span th:text="'with roles: '"></span>
-        <span th:each="role : ${roles}" th:text="${#strings.replace(role.getName(), 'ROLE_', '') + ' '}"></span>
+        <span class="font-weight-bold" ID="adminUsernameNavbar"></span>
+      <span id="rolesAdminNavbar"></span>
+        <span id="adminRolesSpan"></span>
     </span>
     <form th:action="@{/logout}" method="post" class="form-inline">
         <button type="submit" class="btn btn-outline-light">Logout</button>

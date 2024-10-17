@@ -39,4 +39,15 @@ async function loadUserInfo() {
 }
 loadUserInfo();
 
-document.getElementById('usernameSpan');
+async function loadUserNavbar () {
+   try {
+       const response = await fetch('/userAPI/user');
+       const user = await response.json();
+       document.getElementById('usernameSpan').textContent = user.username;
+       document.getElementById('rolesSpan').textContent = "with roles: "
+       document.getElementById('rolesSpanTrue').textContent = user.roles.map(role => role.name.replace('ROLE_', '')).join(',')
+   } catch (error) {
+       console.error('Error loading navbar', error);
+   }
+}
+loadUserNavbar();
