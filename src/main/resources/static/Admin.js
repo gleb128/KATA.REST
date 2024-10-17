@@ -123,9 +123,6 @@ function closeModal() {
     $('#deleteModal').modal('hide');
 }
 
-//document.getElementById('openModalBtn').addEventListener('click', openModal);
-//document.getElementById('closeModal').addEventListener('click', closeModal);
-
 
 async function deleteUser(id) {
     try {
