@@ -38,3 +38,5 @@ async function loadUserInfo() {
     }
 }
 loadUserInfo();
+
+document.getElementById('usernameSpan');
