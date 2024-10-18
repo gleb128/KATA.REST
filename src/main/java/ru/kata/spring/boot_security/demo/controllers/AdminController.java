@@ -23,14 +23,11 @@ public class AdminController {
     private UserServiceInterface userServiceInterface;
 
     @PutMapping("/admin/users/{id}")
-    public ResponseEntity<User> updateUser(@RequestParam(value = "roleIds", required = false) List<Long> roleIds, @RequestBody User user) {
-        if (roleIds == null) {
-            roleIds = new ArrayList<>();
-        }
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        userServiceInterface.updateUser(user, roleIds);
+        userServiceInterface.updateUser(user);
         return ResponseEntity.ok(user);
     }
     @PostMapping("/admin/users")

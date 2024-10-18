@@ -19,14 +19,6 @@ public class AdminPageController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
-    @PostMapping("/admin/update-user1")
-    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
-        if (roleIds == null) {
-            roleIds = new ArrayList<>();
-        }
-        userServiceInterface.updateUser(user, roleIds);
-        return "redirect:/admin/all-users1";
-    }
     @PostMapping("/admin/save-new-user1")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam("roleIds") List<Long> roleIds) {
         userServiceInterface.saveUser(user);

@@ -35,7 +35,7 @@ async function loadAllUsers() {
             const editButton = document.createElement('button')
             editButton.textContent = 'Edit';
             editButton.classList.add('btn', 'btn-primary')
-            /// event dobavit'
+            editButton.addEventListener('click', () => openUpdateModal(user.id))
             editCell.appendChild(editButton)
 
             const deleteCell = document.createElement('td')
@@ -119,17 +119,13 @@ async function addNewUser() {
 }
 
 
-function closeModal() {
-    $('#deleteModal').modal('hide');
-}
-
-
 async function deleteUser(id) {
     try {
         const response = await fetch(`/admin/users/${id}`, {method: 'DELETE'})
         if (response.ok) {
             console.log(`user with ${id} was deleted `)
             await loadAllUsers()
+            $('#deleteModal').modal('hide');
         } else {
             console.error('Error deleting user')
         }
@@ -150,3 +146,61 @@ async function loadAdminNavbar () {
     }
 }
 loadAdminNavbar()
+
+///////////UPDATE USER
+
+
+async function openUpdateModal (id) {
+try {
+    const response = await fetch(`/admin/user-info/${id}`);
+    const userBeforeUpdate = await response.json();
+    console.log(userBeforeUpdate)
+    document.getElementById('idUpdate').value = userBeforeUpdate.id;
+    document.getElementById('nameUpdate').value = userBeforeUpdate.name;
+    document.getElementById('lastNameUpdate').value = userBeforeUpdate.lastName;
+    document.getElementById('ageUpdate').value = userBeforeUpdate.age;
+    document.getElementById('usernameUpdate').value = userBeforeUpdate.username;
+    document.getElementById('rolesUpdate').value = userBeforeUpdate.roles;
+    $('#updateUserModal').modal('show');
+    document.getElementById('UpdateUserModalButton').onclick = () => {
+        const updatedUser = {
+            id: document.getElementById('idUpdate').value,
+            name: document.getElementById('nameUpdate').value,
+            lastName: document.getElementById('lastNameUpdate').value,
+            age: document.getElementById('ageUpdate').value,
+            username: document.getElementById('usernameUpdate').value,
+            password: document.getElementById('passwordUpdate').value,
+            roles: Array.from(document.getElementById('rolesUpdate').selectedOptions).map(option => ({id: parseInt(option.value)}))
+        };
+        updateUser(updatedUser.id, updatedUser);
+    };
+}
+catch (error) {
+    console.log('Error opening user update modal', error)
+}
+}
+
+async function updateUser(id, updatedUser) {
+    try {
+        const response = await fetch(`/admin/users/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+        })
+    if (response.ok) {
+        console.log('User updated')
+        $('#updateUserModal').modal('hide');
+        await  loadAllUsers()
+    }
+    }
+    catch
+        (error)
+        {
+            console.error('error updating user', error)
+        }
+}
+
+
+

@@ -29,10 +29,12 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     }
 
     @Transactional
-    public void updateUser(User user, List<Long> roleIds) {
-        List<Role> roles = roleRepository.findAllById(roleIds);
-        user.setRoles(new HashSet<>(roles));
-        if (!user.getPassword().isEmpty()) {
+    public void updateUser(User user) {
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles(existingUser.getRoles());
+        }
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         userRepository.save(user);
