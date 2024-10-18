@@ -102,18 +102,19 @@ async function addNewUser() {
 }
 
 /////////////////////////Удаление юзера
- async function openDeleteModal (id) {
-    try { const response = await fetch(`/admin/user-info/${id}`)
-          const userToDelete = await response.json();
+async function openDeleteModal(id) {
+    try {
+        const response = await fetch(`/admin/user-info/${id}`)
+        const userToDelete = await response.json();
         console.log(userToDelete);
-        document.getElementById('idDel').value=userToDelete.id
+        document.getElementById('idDel').value = userToDelete.id
         document.getElementById('nameDel').value = userToDelete.name
         document.getElementById('lastNameDel').value = userToDelete.lastName
         document.getElementById('ageDel').value = userToDelete.age
         document.getElementById('usernameDel').value = userToDelete.username
         $('#deleteModal').modal('show');
         document.getElementById('userDeleteButtonModal').onclick = () => deleteUser(userToDelete.id);
-    } catch(error) {
+    } catch (error) {
         console.error("Error finding user: ", error);
     }
 }
@@ -134,7 +135,7 @@ async function deleteUser(id) {
     }
 }
 
-async function loadAdminNavbar () {
+async function loadAdminNavbar() {
     try {
         const response = await fetch('/userAPI/user');
         const user = await response.json();
@@ -145,39 +146,39 @@ async function loadAdminNavbar () {
         console.error('Error loading navbar', error);
     }
 }
+
 loadAdminNavbar()
 
 ///////////UPDATE USER
 
 
-async function openUpdateModal (id) {
-try {
-    const response = await fetch(`/admin/user-info/${id}`);
-    const userBeforeUpdate = await response.json();
-    console.log(userBeforeUpdate)
-    document.getElementById('idUpdate').value = userBeforeUpdate.id;
-    document.getElementById('nameUpdate').value = userBeforeUpdate.name;
-    document.getElementById('lastNameUpdate').value = userBeforeUpdate.lastName;
-    document.getElementById('ageUpdate').value = userBeforeUpdate.age;
-    document.getElementById('usernameUpdate').value = userBeforeUpdate.username;
-    document.getElementById('rolesUpdate').value = userBeforeUpdate.roles;
-    $('#updateUserModal').modal('show');
-    document.getElementById('UpdateUserModalButton').onclick = () => {
-        const updatedUser = {
-            id: document.getElementById('idUpdate').value,
-            name: document.getElementById('nameUpdate').value,
-            lastName: document.getElementById('lastNameUpdate').value,
-            age: document.getElementById('ageUpdate').value,
-            username: document.getElementById('usernameUpdate').value,
-            password: document.getElementById('passwordUpdate').value,
-            roles: Array.from(document.getElementById('rolesUpdate').selectedOptions).map(option => ({id: parseInt(option.value)}))
+async function openUpdateModal(id) {
+    try {
+        const response = await fetch(`/admin/user-info/${id}`);
+        const userBeforeUpdate = await response.json();
+        console.log(userBeforeUpdate)
+        document.getElementById('idUpdate').value = userBeforeUpdate.id;
+        document.getElementById('nameUpdate').value = userBeforeUpdate.name;
+        document.getElementById('lastNameUpdate').value = userBeforeUpdate.lastName;
+        document.getElementById('ageUpdate').value = userBeforeUpdate.age;
+        document.getElementById('usernameUpdate').value = userBeforeUpdate.username;
+        document.getElementById('rolesUpdate').value = userBeforeUpdate.roles;
+        $('#updateUserModal').modal('show');
+        document.getElementById('UpdateUserModalButton').onclick = () => {
+            const updatedUser = {
+                id: document.getElementById('idUpdate').value,
+                name: document.getElementById('nameUpdate').value,
+                lastName: document.getElementById('lastNameUpdate').value,
+                age: document.getElementById('ageUpdate').value,
+                username: document.getElementById('usernameUpdate').value,
+                password: document.getElementById('passwordUpdate').value,
+                roles: Array.from(document.getElementById('rolesUpdate').selectedOptions).map(option => ({id: parseInt(option.value)}))
+            };
+            updateUser(updatedUser.id, updatedUser);
         };
-        updateUser(updatedUser.id, updatedUser);
-    };
-}
-catch (error) {
-    console.log('Error opening user update modal', error)
-}
+    } catch (error) {
+        console.log('Error opening user update modal', error)
+    }
 }
 
 async function updateUser(id, updatedUser) {
@@ -189,17 +190,15 @@ async function updateUser(id, updatedUser) {
             },
             body: JSON.stringify(updatedUser)
         })
-    if (response.ok) {
-        console.log('User updated')
-        $('#updateUserModal').modal('hide');
-        await  loadAllUsers()
-    }
-    }
-    catch
-        (error)
-        {
-            console.error('error updating user', error)
+        if (response.ok) {
+            console.log('User updated')
+            $('#updateUserModal').modal('hide');
+            await loadAllUsers()
         }
+    } catch
+        (error) {
+        console.error('error updating user', error)
+    }
 }
 
 

@@ -12,7 +12,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/userAPI")
-public class UserController {
+public class UserRestController {
     @Autowired
     private UserServiceInterface userService;
 
