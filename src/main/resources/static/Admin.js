@@ -112,7 +112,7 @@ async function addNewUser() {
         document.getElementById('ageDel').value = userToDelete.age
         document.getElementById('usernameDel').value = userToDelete.username
         $('#deleteModal').modal('show');
-        document.getElementById('userDeleteButtonModal').addEventListener('click',() => deleteUser(userToDelete.id))
+        document.getElementById('userDeleteButtonModal').onclick = () => deleteUser(userToDelete.id);
     } catch(error) {
         console.error("Error finding user: ", error);
     }
