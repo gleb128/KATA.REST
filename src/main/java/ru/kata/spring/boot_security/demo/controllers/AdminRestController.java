@@ -22,6 +22,7 @@ public class AdminRestController {
         userServiceInterface.updateUser(user);
         return ResponseEntity.ok(user);
     }
+
     @PostMapping("/admin/users")
     public ResponseEntity<String> saveUser(@RequestBody User user) {
         boolean isSaved = userServiceInterface.saveUser(user);
@@ -38,13 +39,13 @@ public class AdminRestController {
     }
 
     @GetMapping("/admin/user-info/{id}")
-    public ResponseEntity<User> getUserInfo(@PathVariable Long id)  {
+    public ResponseEntity<User> getUserInfo(@PathVariable Long id) {
         User user = userServiceInterface.findUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/admin/users/{id}")
-    public ResponseEntity<String> deleteUser( @PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userServiceInterface.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }

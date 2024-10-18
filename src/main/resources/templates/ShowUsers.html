@@ -61,10 +61,12 @@
             <br>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Users table</a>
+                    <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab"
+                       aria-controls="users" aria-selected="true">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="new-user-tab" data-toggle="tab" href="#new-user" role="tab" aria-controls="new-user" aria-selected="false">New User</a>
+                    <a class="nav-link" id="new-user-tab" data-toggle="tab" href="#new-user" role="tab"
+                       aria-controls="new-user" aria-selected="false">New User</a>
                 </li>
             </ul>
 
@@ -76,23 +78,23 @@
                         <h5>Users table</h5>
                     </div>
                     <br>
-            <table class="table table-striped" id="AdminTable">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>LastName</th>
-                    <th>Age</th>
-                    <th>Username</th>
-                    <th>Roles</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
+                    <table class="table table-striped" id="AdminTable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>LastName</th>
+                            <th>Age</th>
+                            <th>Username</th>
+                            <th>Roles</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
                 </div>
 
 
@@ -101,50 +103,50 @@
                     <div class="container-fluid min-vh-100">
                         <div class="row min-vh-100 justify-content-center">
                             <div class="col-md-3">
-                    <br>
-                    <form id="addUserForm">
-                        <div class="form-group text-center">
-                            <label for="name" class="font-weight-bold text-center">First name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name">
-                        </div>
+                                <br>
+                                <form id="addUserForm">
+                                    <div class="form-group text-center">
+                                        <label for="name" class="font-weight-bold text-center">First name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Name">
+                                    </div>
 
-                        <div class="form-group text-center">
-                            <label for="lastName" class="font-weight-bold">Last name</label>
-                            <input type="text" class="form-control" id="lastName"
-                                   placeholder="Last name">
-                        </div>
+                                    <div class="form-group text-center">
+                                        <label for="lastName" class="font-weight-bold">Last name</label>
+                                        <input type="text" class="form-control" id="lastName"
+                                               placeholder="Last name">
+                                    </div>
 
-                        <div class="form-group text-center">
-                            <label for="age" class="font-weight-bold">Age</label>
-                            <input type="number" class="form-control" id="age" placeholder="Age">
-                        </div>
+                                    <div class="form-group text-center">
+                                        <label for="age" class="font-weight-bold">Age</label>
+                                        <input type="number" class="form-control" id="age" placeholder="Age">
+                                    </div>
 
-                        <div class="form-group text-center">
-                            <label for="username" class="font-weight-bold">Username</label>
-                            <input type="text" class="form-control"  id="username"
-                                   placeholder="username">
-                        </div>
+                                    <div class="form-group text-center">
+                                        <label for="username" class="font-weight-bold">Username</label>
+                                        <input type="text" class="form-control" id="username"
+                                               placeholder="username">
+                                    </div>
 
-                        <div class="form-group text-center">
-                            <label for="password" class="font-weight-bold">Password</label>
-                            <input type="password" class="form-control" id="password"
-                                   placeholder="Password">
-                        </div>
+                                    <div class="form-group text-center">
+                                        <label for="password" class="font-weight-bold">Password</label>
+                                        <input type="password" class="form-control" id="password"
+                                               placeholder="Password">
+                                    </div>
 
-                        <div class="form-group text-center">
-                            <label for="roles" class="font-weight-bold">Role</label>
-                            <select multiple class="form-control" name="roleIds" id="roles">
-                                <option value="1">ROLE_USER</option>
-                                <option value="2">ROLE_ADMIN</option>
-                            </select>
-                        </div>
+                                    <div class="form-group text-center">
+                                        <label for="roles" class="font-weight-bold">Role</label>
+                                        <select multiple class="form-control" name="roleIds" id="roles">
+                                            <option value="1">ROLE_USER</option>
+                                            <option value="2">ROLE_ADMIN</option>
+                                        </select>
+                                    </div>
 
-                        <button type="submit" class="btn btn-success btn-block">Add new user</button>
-                    </form>
+                                    <button type="submit" class="btn btn-success btn-block">Add new user</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-                </div>
-            </div>
             </div>
 
 
@@ -165,38 +167,39 @@
                                     <input type="text" class="form-control" id="idDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">name</label>
                                     <input type="text" class="form-control" id="nameDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">Last Name</label>
                                     <input type="text" class="form-control" id="lastNameDel"
-                                            readonly>
+                                           readonly>
                                 </div>
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">Age</label>
                                     <input type="number" class="form-control" id="ageDel"
                                            readonly>
                                 </div>
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">Username</label>
                                     <input type="text" class="form-control" name="username" id="usernameDel"
-                                          readonly>
+                                           readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-weight-bold text-center w-100">Roles</label>
-                                        <select multiple class="form-control" name="roleIds" id="rolesDel">
-                                            <option value="1">ROLE_USER</option>
-                                            <option value="2">ROLE_ADMIN</option>
-                                        </select>
+                                    <select multiple class="form-control" name="roleIds" id="rolesDel">
+                                        <option value="1">ROLE_USER</option>
+                                        <option value="2">ROLE_ADMIN</option>
+                                    </select>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="userDeleteButtonModal">Delete</button>
+                                    <button type="button" class="btn btn-danger" id="userDeleteButtonModal">Delete
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -253,20 +256,15 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="UpdateUserModalButton">Save changes</button>
+                                    <button type="button" class="btn btn-primary" id="UpdateUserModalButton">Save
+                                        changes
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
 
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -1,4 +1,4 @@
-const requestURL = "http://localhost:8080/admin/users"
+const requestURL = "/admin/users"
 const adminTable = document.getElementById("AdminTable")
 
 async function loadAllUsers() {
@@ -69,7 +69,6 @@ const newUserForm = document.getElementById('addUserForm');
 newUserForm.addEventListener('submit', (event) => {
     addNewUser();
     event.preventDefault()
-
 })
 
 function createUserFromForm() {
@@ -95,6 +94,7 @@ async function addNewUser() {
             console.log("User added", data);
             document.querySelector('#users-tab').click();
             loadAllUsers()
+            document.getElementById('addUserForm').reset();
         })
         .catch(error => {
             console.error("Error adding user:", error);
@@ -184,19 +184,16 @@ async function openUpdateModal(id) {
 async function updateUser(id, updatedUser) {
     try {
         const response = await fetch(`/admin/users/${id}`, {
-            method: 'PUT',
-            headers: {
+            method: 'PUT', headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedUser)
+            }, body: JSON.stringify(updatedUser)
         })
         if (response.ok) {
             console.log('User updated')
             $('#updateUserModal').modal('hide');
             await loadAllUsers()
         }
-    } catch
-        (error) {
+    } catch (error) {
         console.error('error updating user', error)
     }
 }
